@@ -123,6 +123,7 @@ ul li{
 <script type="text/javascript">
 	var box = $('#box');
 	var num = 1;//默认是第一页
+	
 	$('#btn').click(function(){
 		var val = $('#Text').val();
 //		createLi(0,val);
@@ -137,6 +138,7 @@ ul li{
 		num = window.location.hash.split('=')[1];
 		createLi(8*(num-1),val);
 	}
+	
 	function createLi(start,val){//从第几页开始  val值
 		$.ajax({
 			url:'https://api.douban.com//v2/movie/search?callback=?',
