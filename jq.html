@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style>
+		#box div {
+			width: 300px;
+			height: 200px;
+			border: 1px solid #000;
+		}
+		.active {
+			background: red;
+		}
+		.show {
+			display: block;
+		}
+		.hide {
+			display: none;
+		}
+	</style>
+</head>
+<body>
+<div id="box">
+	<!--<input type="button" value="新闻" class="active">
+	<input type="button" value="军事">
+	<input type="button" value="图片">
+	<div class="show"></div>
+	<div class="hide"></div>
+	<div class="hide"></div>-->
+</div>
+<script type="text/javascript" src="jquery-3.1.1.js"></script>
+<script>
+//	(function(global,factory,$){
+//		factory(global,$);
+//	})(typeof window !== 'undefined'?window:this,function(global,$,noGlobal){
+//	
+//	},jQuery);
+	
+	(function(global,factory,$){
+		factory(global,$);
+	})(typeof window !== 'undefined'?window:this,function(){
+		
+		function Tab(that){
+			//存父级
+			this.box = that;
+			//默认配置
+			this.settings = {
+				nav:['新闻1','图片1','军事1'],
+				content:[
+					'今天的新闻。。。。。。',
+					'今天的图片。。。。。',
+					'军事新闻。。。。。'
+				]
+				
+			}
+		}
+		
+		$.extend(Tab.prototype,{
+			init:function(opt){
+				$.extend(this.settings,opt);//有配置走配置，没配置走默认
+				//调用方法
+				this.createBtn();
+				this.createDiv();
+				this.change();
+			},
+			createBtn:function(){
+				var _this = this;
+				$.each(this.settings.nav,function(i,e){
+					$(_this.box).append($('<input type="button" value="'+e+'" class="'+((i==0)?'active':'')+'">'))
+				})
+			},
+			createDiv:function(){
+				var _this = this;
+				$.each(this.settings.content,function(i,e){
+					$(_this.box).append('<div class="'+((i==0)?'show':'hide')+'">'+e+'</div>');
+				});
+			},
+			change:function(){
+				var btns = $('#box').find('input');
+				var divs = $('#box').find('div');
+				btns.click(function(){
+					$(this).addClass('active').siblings('input').removeClass('active');
+					divs.eq($(this).index('input')).show().siblings('div').hide();
+				})
+			
+			}
+			
+		})
+		
+		//写tab这个方法
+		$.fn.extend({
+			tab:function(opt){
+				var t = new Tab(this);//this是绑定的box
+				t.init(opt);//opt配置参数
+				return $(this);
+			}
+		});
+	},jQuery);
+
+	$('#box').tab();
+</script>
+</body>
+</html>
