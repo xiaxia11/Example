@@ -64,6 +64,7 @@
 	user.onblur = function(){
 		ul.style.display = 'none';
 	}
+	
 //	console.log(document.cookie)
 	//获取用户名
 	function getUser(){
@@ -96,6 +97,7 @@
 		data.setDate(data.getDate()+time);
 		document.cookie = key + '=' +val+';expires='+(time?data:0);
 	}
+	
 	
 	//获取cookie
 	function getCookie(key,value){
