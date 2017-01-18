@@ -125,7 +125,14 @@ ul li{
 	var box = $('#box');
 	var num = 1;//默认是第一页
 	
-
+	$('#btn').click(function(){
+		var val = $('#Text').val();
+//		createLi(0,val);
+		if(window.location.hash.split('=')[1] ==='1'){
+			createLi(0,val);
+		}
+		window.location.hash = 'num=1';
+	});
 	
 	window.onhashchange = function(){
 		var val = $('#Text').val();
